@@ -15,10 +15,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="#" th:href="list">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="#" th:href="form">Add Student</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
@@ -31,13 +31,29 @@
     </div>
 </nav>
     <h3 th:text="${dante.getName()}" ></h3>
-<table>
+<table class="table">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Exam</th>
+        <th scope="col">Mark</th>
+    </tr>
     <tr th:each="student : ${list}" >
-        <td th:text="${student.getId()}"></td>
-        <td th:text="${student.getName()}"></td>
-        <td th:text="${student.getSurname()}"></td>
-        <td th:text="${student.getExam()}"></td>
-        <td th:text="${student.getMark()}"></td>
+        <div th:if="${student.getExam() < 50}" style="color: red">
+        <td style="color: red;" th:text="${student.getId()}"></td>
+        <td style="color: red;" th:text="${student.getName()}"></td>
+        <td style="color: red;" th:text="${student.getSurname()}"></td>
+        <td style="color: red;" th:text="${student.getExam()}"></td>
+        <td style="color: red;" th:text="${student.getMark()}"></td>
+        </div>
+        <div th:if="${student.getExam() >= 50}" >
+            <td th:text="${student.getId()}"></td>
+            <td th:text="${student.getName()}"></td>
+            <td th:text="${student.getSurname()}"></td>
+            <td th:text="${student.getExam()}"></td>
+            <td th:text="${student.getMark()}"></td>
+        </div>
     </tr>
 </table>
 
